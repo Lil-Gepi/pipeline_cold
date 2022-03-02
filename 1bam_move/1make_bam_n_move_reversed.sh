@@ -23,4 +23,3 @@ do
     echo "samtools view -b -q 20 -F 0x400 -T ~/RS/reference/dsimM252v1.2+microbiome.fa -o ~/RS/data/${bamfilename}/${bamfilename}.bam /Volumes/Data/${pool}/a/${cramfile}"
   done
 done | parallel -j 10
-
