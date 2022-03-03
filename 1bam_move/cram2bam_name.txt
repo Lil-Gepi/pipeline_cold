@@ -1,4 +1,3 @@
-cram	bam
 ###gen_0
 LB_126_2.TI02 coldF0r11
 LB_126_2.TI04 coldF0r12
