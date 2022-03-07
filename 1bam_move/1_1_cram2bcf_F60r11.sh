@@ -1,7 +1,6 @@
 #!/bin/bash
 ## 1. Prepare the raw single-sample pileup
-samtools --version
-bcftools --version
+
 # adjust these variables as needed
 # read length
 read_length=150
@@ -40,3 +39,5 @@ in_bcf="/Users/ychen/COLD/data/coldF60_r11/coldF60_r11_raw.bcf"
 # output path (use - to write uncompressed BCF to stdout, or leave empty to write VCF to stdout)
 out_bcf="/Users/ychen/COLD/data/coldF60_r11/coldF60_r11_pre.bcf"
 ./rupert_pipe_v2/pre-merging.sh "$in_bcf" "$out_bcf"
+
+exit
