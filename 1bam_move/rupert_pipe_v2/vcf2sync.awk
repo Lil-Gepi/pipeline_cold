@@ -1,4 +1,4 @@
-#!/usr/bin/gawk -f
+#!/usr/local/bin/gawk -f
 # transform VCF into SYNC file
 # # using
 BEGIN{
@@ -80,7 +80,7 @@ function mk_sync_line( chrom,pos,ref,alt,x,info,del_len,real_ref,i,format,adx,co
 	del_len=0
 	for (i in x)
 	switch (x[i]) {
-		case "INDEL" : 
+		case "INDEL" :
 			del_len=length(ref)-length(alt)
 			if (del_len<0)
 				skip_with_msg("ignoring INS")
@@ -163,7 +163,7 @@ function merge_lines(L1,L2, u,v,x,y,i,j,n) {
 		skip_with_msg("duplicate position, but different sample number?")
 	# check REF
 	if (x[3]!=y[3])
-		skip_with_msg("REFs do not match") 
+		skip_with_msg("REFs do not match")
 	n=length(x)
 	for (i=4;i<=n;i++) {
 		split(x[i],u,":")

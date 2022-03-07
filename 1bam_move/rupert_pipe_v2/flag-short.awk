@@ -1,4 +1,4 @@
-#!/usr/bin/gawk -f
+#!/usr/local/bin/gawk -f
 # flag templates shorter than the read length as QCFAIL
 
 BEGIN{

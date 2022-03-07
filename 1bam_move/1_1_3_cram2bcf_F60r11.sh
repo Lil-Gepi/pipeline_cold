@@ -11,14 +11,13 @@ ref_fa="~/COLD/reference/dsimM252v1.2+microbiome.fa"
 max_cov=400
 # input path (if your samples have been sequenced on multiple lanes, the CRAMs
 # for a single sample need to be samtools-merged into one file instead, see below)
-in_folder_329="/Volumes/Data/329"
-in_folder_356="/Volumes/Data/356"
+in_folder_329="~/COLD/data/coldF60r11_1"
+in_folder_356="~/COLD/data/coldF60r11_2"
 
 # 1.a convert to SAM (needed by awk scripts)
 # samtools view -h "$in_cram" |\
 # or with multiple CRAMs for the same sample
-samtools merge -O SAM -o - \
-("$in_folder_329/a/LB_329.D707.cram" "$in_folder_329/b/LB_329.D707.cram" "$in_folder_356/a/LB_356.D707+D507.cram" |\
+samtools merge -O SAM -o - "$in_folder_329/coldF60r11_1_a.cram" "$in_folder_329/coldF60r11_1_b.cram" "$in_folder_356/coldF60r11_2_a.bam" |\
   # 1.b flag short fragments  (replace $rl with the actual read length)
   ./flag-short.awk -v  |\
   # 1.c recalculate mapping quality
