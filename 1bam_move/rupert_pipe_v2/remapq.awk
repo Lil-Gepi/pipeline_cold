@@ -1,4 +1,4 @@
-#!/usr/bin/awk -f
+#!/Users/ychen/Library/bin/awk -f
 # reestimate mapping qualities based on AS/XS
 
 BEGIN{
