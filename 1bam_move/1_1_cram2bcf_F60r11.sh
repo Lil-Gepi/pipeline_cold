@@ -4,9 +4,9 @@
 # read length
 read_length=150
 # output path (I use BCF, the compressed binary version of VCF, here)
-out_bcf="~/COLD/data/coldF60_r11/coldF60_r11_raw.bcf"
+out_bcf="/Users/ychen/COLD/data/coldF60_r11/coldF60_r11_raw.bcf"
 # reference genome in FASTA format
-ref_fa="~/COLD/reference/dsimM252v1.2+microbiome.fa"
+ref_fa="/Users/ychen/COLD/reference/dsimM252v1.2+microbiome.fa"
 # max. depth to consider, set to 5x expected autosomal coverage
 max_cov=400
 # input path (if your samples have been sequenced on multiple lanes, the CRAMs
@@ -34,7 +34,7 @@ samtools merge -O SAM -o - "$in_folder_329/a/LB_329.D707.cram" "$in_folder_329/b
 
 ## 2. Annotate raw single-sample pileup with more FORMAT tags (to save the information from INFO)
 # input path (a pileup generated in step 1 in BCF, VCF, or bgzipped VCF format, cannot be a pipe!)
-in_bcf="~/COLD/data/coldF60_r11/coldF60_r11_raw.bcf"
+in_bcf="/Users/ychen/COLD/data/coldF60_r11/coldF60_r11_raw.bcf"
 # output path (use - to write uncompressed BCF to stdout, or leave empty to write VCF to stdout)
-out_bcf="~/COLD/data/coldF60_r11/coldF60_r11_pre.bcf"
+out_bcf="/Users/ychen/COLD/data/coldF60_r11/coldF60_r11_pre.bcf"
 ./rupert_pipe_v2/pre-merging.sh "$in_bcf" "$out_bcf"
