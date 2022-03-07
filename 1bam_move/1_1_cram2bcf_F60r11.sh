@@ -1,6 +1,7 @@
 #!/bin/bash
 ## 1. Prepare the raw single-sample pileup
-
+samtools --version
+bcftools --version
 # adjust these variables as needed
 # read length
 read_length=150
