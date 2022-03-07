@@ -18,7 +18,7 @@ in_folder_356="/Volumes/Data/356"
 # 1.a convert to SAM (needed by awk scripts)
 # samtools view -h "$in_cram" |\
 # or with multiple CRAMs for the same sample
-samtools merge -O SAM -o - "$in_folder_329/a/LB_329.D707.cram" "$in_folder_329/b/LB_329.D707.cram" "$in_folder_356/a/LB_356.D707+D507.cram" |\
+/Users/ychen/Library/bin/samtools merge -O SAM -o - "$in_folder_329/a/LB_329.D707.cram" "$in_folder_329/b/LB_329.D707.cram" "$in_folder_356/a/LB_356.D707+D507.cram" |\
   # 1.b flag short fragments  (replace $rl with the actual read length)
   /Users/ychen/COLD/pipeline_cold/1bam_move/rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$read_length |\
   # 1.c recalculate mapping quality
@@ -31,13 +31,13 @@ samtools merge -O SAM -o - "$in_folder_329/a/LB_329.D707.cram" "$in_folder_329/b
   # -Q 20 ... count only bases with min(base quality,BAQ) passing the threshold
   # -D    ... enable BAQ calculation for all positions (check bcftools manpage for details)
   # -a DP,AD ... annotate with additional fields (AD = allele depth for each allele is needed below!)
-  bcftools mpileup -f "$ref_fa" -d $max_cov --incl-flags 0x2 -q 10 -Q 20 -D -a DP,AD,QS,SCR -Ob - > "$out_bcf"
+  /Users/ychen/Library/bin/bcftools mpileup -f "$ref_fa" -d $max_cov --incl-flags 0x2 -q 10 -Q 20 -D -a DP,AD,QS,SCR -Ob - > "$out_bcf"
 
 ## 2. Annotate raw single-sample pileup with more FORMAT tags (to save the information from INFO)
 # input path (a pileup generated in step 1 in BCF, VCF, or bgzipped VCF format, cannot be a pipe!)
 in_bcf="/Users/ychen/COLD/data/coldF60_r11/coldF60_r11_raw.bcf"
 # output path (use - to write uncompressed BCF to stdout, or leave empty to write VCF to stdout)
 out_bcf="/Users/ychen/COLD/data/coldF60_r11/coldF60_r11_pre.bcf"
-./rupert_pipe_v2/pre-merging.sh "$in_bcf" "$out_bcf"
+/Users/ychen/COLD/pipeline_cold/rupert_pipe_v2/pre-merging.sh "$in_bcf" "$out_bcf"
 
 exit
