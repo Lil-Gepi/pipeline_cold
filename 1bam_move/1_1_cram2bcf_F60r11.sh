@@ -19,9 +19,9 @@ in_folder_356="/Volumes/Data/356"
 # or with multiple CRAMs for the same sample
 samtools merge -O SAM -o - "$in_folder_329/a/LB_329.D707.cram" "$in_folder_329/b/LB_329.D707.cram" "$in_folder_356/a/LB_356.D707+D507.cram" |\
   # 1.b flag short fragments  (replace $rl with the actual read length)
-  /User/ychen/COLD/pipeline_cold/1bam_move/rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$read_length |\
+  /Users/ychen/COLD/pipeline_cold/1bam_move/rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$read_length |\
   # 1.c recalculate mapping quality
-  /User/ychen/COLD/pipeline_cold/1bam_move/rupert_pipe_v2/remapq.awk -v NORD=7.5 |\
+  /Users/ychen/COLD/pipeline_cold/1bam_move/rupert_pipe_v2/remapq.awk -v NORD=7.5 |\
   # 1.d make single-sample pileup
   # --incl-flags 0x2 ... include only proper pairs
   # -q 10 ... include only reads with a mapping quality that apsses the threshold
