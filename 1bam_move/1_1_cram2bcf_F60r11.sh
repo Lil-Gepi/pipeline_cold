@@ -1,3 +1,4 @@
+#!/bin/bash
 ## 1. Prepare the raw single-sample pileup
 
 # adjust these variables as needed
