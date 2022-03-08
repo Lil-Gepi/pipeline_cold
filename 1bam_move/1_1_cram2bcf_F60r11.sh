@@ -19,8 +19,7 @@ in_folder_356="/Volumes/Data/356"
 # 1.a convert to SAM (needed by awk scripts)
 # samtools view -h "$in_cram" |\
 # or with multiple CRAMs for the same sample
-samtools merge --reference "$ref_fa" -O SAM -o - "$in_folder_329/a/LB_329.D707.cram" \
-  "$in_folder_329/b/LB_329.D707.cram" "$in_folder_356/a/LB_356.D707+D507.cram" |\
+samtools merge --reference "$ref_fa" -O SAM -o - "$in_folder_329/a/LB_329.D707.cram" "$in_folder_329/b/LB_329.D707.cram" "$in_folder_356/a/LB_356.D707+D507.cram" |\
   # 1.b flag short fragments  (replace $rl with the actual read length)
   ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$read_length |\
   # 1.c recalculate mapping quality
