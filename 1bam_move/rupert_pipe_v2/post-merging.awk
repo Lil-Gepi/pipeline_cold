@@ -1,4 +1,4 @@
-#!/Users/ychen/Library/bin/gawk -f
+#!/usr/local/bin/gawk -f
 
 BEGIN{
 	# script version
