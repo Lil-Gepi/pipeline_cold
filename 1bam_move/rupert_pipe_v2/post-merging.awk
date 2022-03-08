@@ -1,4 +1,4 @@
-#!/usr/local/bin/gawk -f
+#!/usr/bin/gawk -f
 
 BEGIN{
 	# script version
@@ -75,7 +75,7 @@ BEGIN{
 			# to_del now contains the R-index to remove
 			break
 		}
-        # 1.b annotate positions with INFO/N_ALT
+        # 1.b annotate positions with INFO/N_ALT 
 	N_ALT=length(x)
 	ALT=collapse(x,",")
 	QUAL=$6
@@ -237,7 +237,7 @@ BEGIN{
 			mod_ref=1
 		} else
 			# skip sites with fixed single ALT == also monomorphic
-	       		next
+	       		next	
 	}
 	# set QUAL from QR and QA
 	QUAL="."
@@ -280,7 +280,7 @@ BEGIN{
 	print LINE
 }
 function collapse(x,sep, i,r) {
-	if (isarray(x)) {
+	if (isarray(x)) { 
 		for (i in x)
 			if (r) r=r sep x[i]
 		        else r=x[i] ""
