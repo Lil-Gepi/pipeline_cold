@@ -21,15 +21,13 @@ in_folder_356="/Volumes/Data/356"
 # samtools view -h "$in_cram" |\
 # or with multiple CRAMs for the same sample
 samtools merge -O SAM -o - \
-<(samtools view -T "$ref_fa" -h "$in_folder_329/a/LB_329.D707.cram" |\
- samtools sort -O SAM -m 4G -n -T /Users/ychen/COLD/pipeline_cold/1bam_move/temp -o -|\
+<(samtools view -T "$ref_fa" -h -F 0x400 "$in_folder_329/a/LB_329.D707.cram" |\
  ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$read_length_329 ) \
-<(samtools view -T "$ref_fa" -h "$in_folder_329/b/LB_329.D707.cram" |\
- samtools sort -O SAM -m 4G -n -T /Users/ychen/COLD/pipeline_cold/1bam_move/temp -o -|\
+<(samtools view -T "$ref_fa" -h -F 0x400 "$in_folder_329/b/LB_329.D707.cram" |\
  ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$read_length_329 ) \
-<(samtools view -T "$ref_fa" -h "$in_folder_356/a/LB_356.D707+D507.cram" |\
- samtools sort -O SAM -m 4G -n -T /Users/ychen/COLD/pipeline_cold/1bam_move/temp -o -|\
+<(samtools view -T "$ref_fa" -h -F 0x400 "$in_folder_356/a/LB_356.D707+D507.cram" |\
  ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$read_length_356 )|\
+ samtools sort -O SAM -m 4G -t -n -T /Users/ychen/COLD/pipeline_cold/1bam_move/temp -o -|\
   # 1.b flag short fragments  (replace $rl with the actual read length)
   # ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$read_length |\
   # 1.c recalculate mapping quality
@@ -52,5 +50,5 @@ out_bcf="${cold_folder}/data/coldF60_r11/coldF60_r11_piped_pre.bcf"
 #./rupert_pipe_v2/pre-merging.sh "$in_bcf" "$out_bcf"
 bcftools annotate -Ov -x INFO/IMF,INFO/VDB,INFO/RPBZ,INFO/MQBZ,INFO/MQSBZ,INFO/SCBZ,INFO/BQBZ,INFO/FS,INFO/SGB,INFO/I16,INFO/QS,INFO/MQ0F,FORMAT/PL "$in_bcf" |\
  ./rupert_pipe_v2/info2fmt.awk > "$out_bcf"
- 
+
 exit
