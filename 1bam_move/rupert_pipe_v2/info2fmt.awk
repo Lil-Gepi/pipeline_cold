@@ -1,4 +1,4 @@
-#!/usr/bin/gawk -f
+#!/usr/local/bin/gawk -f
 #
 # copy INFO tags (specifically DP and MQ0) to the genotype field
 #
