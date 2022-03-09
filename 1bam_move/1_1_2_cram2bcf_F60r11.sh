@@ -21,9 +21,9 @@ in_folder_356="/Volumes/Data/356"
 # samtools view -h "$in_cram" |\
 # or with multiple CRAMs for the same sample
 samtools merge -O SAM -o - \
-< (samtools view -T "$ref_fa" -h  "$in_folder_329/a/LB_329.D707.cram" | ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$read_length_329 ) \
-< (samtools view -T "$ref_fa" -h  "$in_folder_329/b/LB_329.D707.cram" | ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$read_length_329 ) \
-< (samtools view -T "$ref_fa" -h  "$in_folder_356/a/LB_356.D707+D507.cram" | ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$read_length_356 )|\
+<(samtools view -T "$ref_fa" -h  "$in_folder_329/a/LB_329.D707.cram" | ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$read_length_329 ) \
+<(samtools view -T "$ref_fa" -h  "$in_folder_329/b/LB_329.D707.cram" | ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$read_length_329 ) \
+<(samtools view -T "$ref_fa" -h  "$in_folder_356/a/LB_356.D707+D507.cram" | ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$read_length_356 )|\
   # 1.b flag short fragments  (replace $rl with the actual read length)
   # ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$read_length |\
   # 1.c recalculate mapping quality
