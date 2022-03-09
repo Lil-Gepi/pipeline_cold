@@ -32,7 +32,7 @@ samtools merge --reference "$ref_fa" -O SAM -o - "$in_folder_329/a/LB_329.D707.c
   # -Q 20 ... count only bases with min(base quality,BAQ) passing the threshold
   # -D    ... enable BAQ calculation for all positions (check bcftools manpage for details)
   # -a DP,AD ... annotate with additional fields (AD = allele depth for each allele is needed below!)
-  bcftools mpileup -f "$ref_fa" -d $max_cov --skip-any-unset 0x2 -q 10 -Q 20 -D -a DP,AD,QS,SCR -Ob - > "$out_bcf"
+  bcftools mpileup -f "$ref_fa" -d $max_cov --skip-all-unset 0x2 --skip-any-set 0x400 0x100 0x800 -q 10 -Q 20 -D -a DP,AD,QS,SCR -Ob - > "$out_bcf"
 
 ## 2. Annotate raw single-sample pileup with more FORMAT tags (to save the information from INFO)
 # input path (a pileup generated in step 1 in BCF, VCF, or bgzipped VCF format, cannot be a pipe!)
