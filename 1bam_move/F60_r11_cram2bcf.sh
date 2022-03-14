@@ -26,7 +26,7 @@ samtools merge -O SAM -o - \
 <(samtools view -T "$ref_fa" -h -F 0x400 "$in_dir_356/a/LB_356.D707+D507.cram" | ./rupert_pipe_v2/flag-short.awk )|\
 # testing the time it takes for auto detecting read length, so no read length was provided to flag-short.awk
 samtools collate -Ouf - | samtools fixmate -ru - - | samtools view -f 0x2 -h - |\
-  # collate sort the SAM files by order of qname, fixmate pairs only primary pairs, the following view command keeps only primary pairs
+  # collate sort the SAM files by order of qname, fixmate keeps drops secondary and other pairing and record the mates' coordinate, the following view command keeps only primary pairs
   # Non-primary pairs flag 0x100, is an additional line in the CRAM for a read that already has a primary alignment.
   # It is independent of the "proper pair" flag 0x2, so a "proper pair" can be a primary alignment of one read and a secondary of its mate.
   # Sometimes, collate -f leaves broken pairs, i.e. reads that have a 0x2 flag, but no mate, so we need the fixmate step to rewrite those flags,
