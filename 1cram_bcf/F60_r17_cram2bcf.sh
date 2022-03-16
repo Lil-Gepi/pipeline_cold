@@ -7,7 +7,7 @@ cold_dir="/Users/ychen/COLD"
 rl=125
 #rl_356=125
 # output path (I use BCF, the compressed binary version of VCF, here)
-out_bcf="${cold_dir}/data/rupert_pipe_data/coldF60_r17/coldF60_r17_norl_raw.bcf"
+out_bcf="${cold_dir}/data/coldF60_r17/coldF60_r17_norl_raw.bcf"
 # reference genome in FASTA format
 ref_fa="${cold_dir}/reference/dsimM252v1.2+microbiome.fa"
 # max. depth to consider, set to 5x expected autosomal coverage
@@ -50,9 +50,9 @@ samtools collate -Ouf - | samtools fixmate -ru - - | samtools view -f 0x2 -h - |
 
 ## 2. Annotate raw single-sample pileup with more FORMAT tags (to save the information from INFO)
 # input path (a pileup generated in step 1 in BCF, VCF, or bgzipped VCF format, cannot be a pipe!)
-in_bcf="${cold_dir}/data/rupert_pipe_data/coldF60_r17/coldF60_r17_norl_raw.bcf"
+in_bcf="${cold_dir}/data/coldF60_r17/coldF60_r17_norl_raw.bcf"
 # output path (use - to write uncompressed BCF to stdout, or leave empty to write VCF to stdout)
-out_bcf="${cold_dir}/data/rupert_pipe_data/coldF60_r17/coldF60_r17_norl_pre.bcf"
+out_bcf="${cold_dir}/data/coldF60_r17/coldF60_r17_norl_pre.bcf"
 #./rupert_pipe_v2/pre-merging.sh "$in_bcf" "$out_bcf"
 # the pre-merging.sh has the "mktemp" syntax difference between linux and mac,
 # so the temprary files ann.hdr and ann.txt.gz are not created, instead use the following command to do the same job.
