@@ -7,7 +7,7 @@ cold_dir="/Users/ychen/COLD"
 rl=100
 #rl_356=125
 # output path (I use BCF, the compressed binary version of VCF, here)
-out_bcf="${cold_dir}/data/F10_r11/coldF10_r11_raw.bcf"
+out_bcf="${cold_dir}/data/F10_r14/coldF10_r14_raw.bcf"
 # reference genome in FASTA format
 ref_fa="${cold_dir}/reference/dsimM252v1.2+microbiome.fa"
 # max. depth to consider, set to 5x expected autosomal coverage
@@ -21,11 +21,11 @@ in_dir_1="/Volumes/Data/132"
 # samtools view -h "$in_cram" |\
 # or with multiple CRAMs for the same sample
 samtools merge -O SAM -o - \
-<(samtools view -T "$ref_fa" -h -F 0x400 "$in_dir_1/a/LB_132.TI02.cram" | ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$rl) \
-<(samtools view -T "$ref_fa" -h -F 0x400 "$in_dir_1/b/LB_132.TI02.cram" | ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$rl) \
-<(samtools view -T "$ref_fa" -h -F 0x400 "$in_dir_1/c/LB_132.TI02.cram" | ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$rl) \
-<(samtools view -T "$ref_fa" -h -F 0x400 "$in_dir_1/d/LB_132.TI02.cram" | ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$rl) \
-<(samtools view -T "$ref_fa" -h -F 0x400 "$in_dir_1/e/LB_132.TI02.cram" | ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$rl) |\
+<(samtools view -T "$ref_fa" -h -F 0x400 "$in_dir_1/a/LB_132.TI06.cram" | ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$rl) \
+<(samtools view -T "$ref_fa" -h -F 0x400 "$in_dir_1/b/LB_132.TI06.cram" | ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$rl) \
+<(samtools view -T "$ref_fa" -h -F 0x400 "$in_dir_1/c/LB_132.TI06.cram" | ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$rl) \
+<(samtools view -T "$ref_fa" -h -F 0x400 "$in_dir_1/d/LB_132.TI06.cram" | ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$rl) \
+<(samtools view -T "$ref_fa" -h -F 0x400 "$in_dir_1/e/LB_132.TI06.cram" | ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$rl) |\
 # testing the time it takes for auto detecting read length, so no read length was provided to flag-short.awk
 samtools collate -Ouf - | samtools fixmate -ru - - | samtools view -f 0x2 -h - |\
   # collate sort the SAM files by order of qname, fixmate pairs only primary pairs, the following view command keeps only primary pairs
@@ -54,9 +54,9 @@ samtools collate -Ouf - | samtools fixmate -ru - - | samtools view -f 0x2 -h - |
 
 ## 2. Annotate raw single-sample pileup with more FORMAT tags (to save the information from INFO)
 # input path (a pileup generated in step 1 in BCF, VCF, or bgzipped VCF format, cannot be a pipe!)
-in_bcf="${cold_dir}/data/F10_r11/coldF10_r11_raw.bcf"
+in_bcf="${cold_dir}/data/F10_r14/coldF10_r14_raw.bcf"
 # output path (use - to write uncompressed BCF to stdout, or leave empty to write VCF to stdout)
-out_bcf="${cold_dir}/data/F10_r11/coldF10_r11_pre.bcf"
+out_bcf="${cold_dir}/data/F10_r14/coldF10_r14_pre.bcf"
 #./rupert_pipe_v2/pre-merging.sh "$in_bcf" "$out_bcf"
 # the pre-merging.sh has the "mktemp" syntax difference between linux and mac,
 # so the temprary files ann.hdr and ann.txt.gz are not created, instead use the following command to do the same job.
