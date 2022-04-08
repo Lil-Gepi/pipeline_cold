@@ -84,6 +84,10 @@ write_pg_hdr{
 			if (have_AS && have_XS)
 				break
 		}
+		if (!have_AS || !have_XS) {
+			print "Error in line " NR ": AS or XS tag missing." > "/dev/stderr"
+			exit
+		}
 		if (XS>0)
 			# heuristic mapping quality from AS/XS
 			NEWQ[i]=p2q(1-smoothstepN(AS/(AS+XS)))
@@ -95,14 +99,16 @@ write_pg_hdr{
 			# read mate line
 			getline
 	}
+
 	# assign the same mapping quality to both members of the pair
 	CONSQ=QMAX
-	for (i in LINE) {
+	for (i in MAPQ) {
 		if (MAPQ[i]<CONSQ)
 			CONSQ=MAPQ[i]
 		if (NEWQ[i]<CONSQ)
 			CONSQ=NEWQ[i]
 	}
+
 	# modify output lines where necessary
 	if (CONSQ<MAPQ[1] || CONSQ<MAPQ[2]) {
 		 for (i in LINE) {
@@ -130,8 +136,8 @@ write_pg_hdr{
 		 }
 
 	}
-	print LINE[1]
-	print LINE[2]
+	for (i in LINE)
+		print LINE[i]
 }
 # rational smoothstep function from https://tpfto.wordpress.com/2019/03/28/on-a-rational-variant-of-smoothstep/
 function smoothstepN(x) {
@@ -156,9 +162,11 @@ function p2q(p, q,r) {
 function collapse(x,sep, i,r) {
 	if (isarray(x)) {
 		for (i in x)
-			if (r)
-				r=r sep x[i]
-			else
+			if (r) {
+				# sometimes weird empty elements in array, gawk bug?
+				if (x[i]!="")
+					r=r sep x[i]
+			} else
 				r=x[i]
 	} else
 		r=x

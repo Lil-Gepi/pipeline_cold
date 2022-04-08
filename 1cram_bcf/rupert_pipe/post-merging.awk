@@ -1,4 +1,4 @@
-#!/usr/bin/gawk -f
+#!/usr/local/bin/gawk -f
 
 # TODO
 # 1.h annotate QUAL based on mapping qualities, base qualities
@@ -79,7 +79,7 @@ BEGIN{
 			# to_del now contains the R-index to remove
 			break
 		}
-        # 1.b annotate positions with INFO/N_ALT 
+        # 1.b annotate positions with INFO/N_ALT
 	N_ALT=length(x)
 	ALT=collapse(x,",")
 	QUAL=$6
@@ -250,7 +250,7 @@ BEGIN{
 	print LINE
 }
 function collapse(x,sep, i,r) {
-	if (isarray(x)) { 
+	if (isarray(x)) {
 		for (i in x)
 			if (r) r=r sep x[i]
 		        else r=x[i] ""

@@ -24,8 +24,7 @@ samtools merge -O SAM -o - \
 <(samtools view -T "$ref_fa" -h -F 0x400 "$in_dir_1/a/LB_185.D712+D505.cram" | ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$rl) \
 <(samtools view -T "$ref_fa" -h -F 0x400 "$in_dir_1/b/LB_185.D712+D505.cram" | ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$rl) \
 <(samtools view -T "$ref_fa" -h -F 0x400 "$in_dir_1/c/LB_185.D712+D505.cram" | ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$rl) \
-<(samtools view -T "$ref_fa" -h -F 0x400 "$in_dir_1/d/LB_185.D712+D505.cram" | ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$rl) \
-<(samtools view -T "$ref_fa" -h -F 0x400 "$in_dir_1/e/LB_185.D712+D505.cram" | ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$rl) |\
+<(samtools view -T "$ref_fa" -h -F 0x400 "$in_dir_1/d/LB_185.D712+D505.cram" | ./rupert_pipe_v2/flag-short.awk -v READ_LENGTH=$rl) |\
 # testing the time it takes for auto detecting read length, so no read length was provided to flag-short.awk
 samtools collate -Ouf - | samtools fixmate -ru - - | samtools view -f 0x2 -h - |\
   # collate sort the SAM files by order of qname, fixmate pairs only primary pairs, the following view command keeps only primary pairs
