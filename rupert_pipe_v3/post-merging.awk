@@ -75,7 +75,7 @@ BEGIN{
 			# to_del now contains the R-index to remove
 			break
 		}
-        # 1.b annotate positions with INFO/N_ALT
+        # 1.b annotate positions with INFO/N_ALT 
 	N_ALT=length(x)
 	ALT=collapse(x,",")
 	QUAL=$6
@@ -198,6 +198,11 @@ BEGIN{
 	# 1.c flag RO=0 positions and change REF to ALT{1}, ALT{1} to ALT{2} etc.
 	mod_ref=0
 	if (RO==0 && TYPE=="snp") {
+		# indices in GT field have changed due to prepending GT:PL
+		adx+=2
+		qsx+=2
+		afx+=2
+		xfx+=2
 		if (N_ALT>1) {
 			split(ALT,x,",")
 			REF=x[1]
@@ -237,7 +242,7 @@ BEGIN{
 			mod_ref=1
 		} else
 			# skip sites with fixed single ALT == also monomorphic
-	       		next
+	       		next	
 	}
 	# set QUAL from QR and QA
 	QUAL="."
@@ -280,7 +285,7 @@ BEGIN{
 	print LINE
 }
 function collapse(x,sep, i,r) {
-	if (isarray(x)) {
+	if (isarray(x)) { 
 		for (i in x)
 			if (r) r=r sep x[i]
 		        else r=x[i] ""

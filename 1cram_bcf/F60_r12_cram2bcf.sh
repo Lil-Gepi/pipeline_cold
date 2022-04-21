@@ -48,7 +48,7 @@ samtools collate -Ouf - | samtools fixmate -ru - - | samtools view -f 0x2 -h - |
   # -Q 20 ... count only bases with min(base quality,BAQ) passing the threshold
   # -D    ... enable BAQ calculation for all positions (check bcftools manpage for details)
   # -a DP,AD ... annotate with additional fields (AD = allele depth for each allele is needed below!)
-  bcftools mpileup -f "$ref_fa" -d $max_cov --skip-all-unset 0x2 -q 10 -Q 20 -D -a DP,AD,QS,SCR -Ob --threads 3 - > "$out_bcf"
+  bcftools mpileup -f "$ref_fa" -d $max_cov --skip-all-unset 0x2 -q 10 -Q 20 -D -a DP,AD,QS,SCR -Ob --threads 16 - > "$out_bcf"
 
 ## 2. Annotate raw single-sample pileup with more FORMAT tags (to save the information from INFO)
 # input path (a pileup generated in step 1 in BCF, VCF, or bgzipped VCF format, cannot be a pipe!)
