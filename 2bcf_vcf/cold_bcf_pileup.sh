@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ## 3. Combine multiple single-sample pilups into a multi-sample pileup
 #
