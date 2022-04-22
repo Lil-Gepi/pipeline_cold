@@ -16,7 +16,7 @@ do
 done
 
 # 3.a merge multiple raw pileups into multi-sample mpileup
-bcftools merge --no-index --merge both --threads 14 -Ov -o - "$in_folder"/*.bcf |\
+bcftools merge --merge both --threads 14 -Ov -o - "$in_folder"/*.bcf |\
   # 3.b annotate with FORMAT/AF (observed allele frequencies) and FORMAT/XF (expected allele frequencies
   # under a multinomial sampling model) tags; also add  FORMAT/SAC (sum of allele counts) tag for convenience
   # finally, change REF of positions with a reference count of 0 to ALT{1} and modify all affected tags accordingly
