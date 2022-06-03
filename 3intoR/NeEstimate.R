@@ -3,15 +3,15 @@
 NeEstimate <- function(dt.pol, 
                        dt.dp, 
                        whichChrom = "autosomes", 
-                       nrSNPs = 100, 
-                       nrIteration = 100, 
-                       timepoints = c(1,60), 
-                       poolSize = c(600,600), 
-                       replicates = 1:6,
-                       census = 1250) 
+                       nrSNPs = 1000L, 
+                       nrIteration = 100L, 
+                       timepoints = c(0L,60L), 
+                       poolSize = c(600L,600L), 
+                       replicates = 1L:10L,
+                       census = 1250L) 
   {
   require(poolSeq)
-  ne_estimates <- NULL
+  ne_estimates <- data.frame(replicate = 0, start = 0, end = 0, trial = 0,  ne = 0)
   if(whichChrom == "autosomes") {
     auto.dt.pol <- dt.pol[which(dt.pol$chr != "X"), ]
     auto.dt.pol$randomSamp  <- 1:nrow(auto.dt.pol)
@@ -21,13 +21,16 @@ NeEstimate <- function(dt.pol,
       print(r)
       pref_i <- paste(timepoints[1], "_r", r, sep = "") #time point i
       pref_j <- paste(timepoints[2], "_r", r, sep = "") #time point j with j>i
+      print(pref_i)
+      print(pref_j)
       for(j in 1:nrIteration){
+        print(j)
         randomSNPs <- sample(1:nrow(auto.dt.pol), size = nrSNPs)
         randomSNPs <- sort(randomSNPs, decreasing = F)
-        freqi <- unlist(subset(auto.dt.pol, randomSamp %in% randomSNPs, select = paste(pref_i)), use.names = F)
-        freqj <- unlist(subset(auto.dt.pol, randomSamp %in% randomSNPs, select = paste(pref_j)), use.names = F)
-        covi <- unlist(subset(auto.dt.dp, randomSamp %in% randomSNPs, select = paste(pref_i)), use.names = F)
-        covj <- unlist(subset(auto.dt.dp, randomSamp %in% randomSNPs, select = paste(pref_j)), use.names = F)
+        freqi <- unlist(subset(auto.dt.pol, randomSamp %in% randomSNPs, select = pref_i), use.names = F)
+        freqj <- unlist(subset(auto.dt.pol, randomSamp %in% randomSNPs, select = pref_j), use.names = F)
+        covi <- unlist(subset(auto.dt.dp, randomSamp %in% randomSNPs, select = pref_i), use.names = F)
+        covj <- unlist(subset(auto.dt.dp, randomSamp %in% randomSNPs, select = pref_j), use.names = F)
         ne <- estimateNe(p0 = freqi, pt = freqj, cov0 = covi, covt = covj, t = timepoints[2]-timepoints[1], 
                          ploidy = 2, truncAF = 0.05, method = "P.planI", poolSize = poolSize, Ncensus = census)
         ne_estimates <- rbind(ne_estimates, data.frame(replicate = r, start = times[1], end = times[2], trial = j,  ne = ne))

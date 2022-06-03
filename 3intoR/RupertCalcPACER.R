@@ -3,10 +3,10 @@
 calc_pvals <- function(dt.af,dt.dp,
                        drop.af.cols=5L,
                        drop.dp.cols=2L,
-                       par.rep=1L:5L,
-                       par.gen=10L*0L:8L,
-                       par.Ne=rep(500L,5L),
-                       par.poolSize=rep(852L,45L),
+                       par.rep=1L:10L,
+                       par.gen=10L*0L:6L,
+                       par.Ne=rep(500L,60L),
+                       par.poolSize=rep(852L,60L),
                        correct.multi=TRUE) {
   require(ACER)
   stopifnot(all(key(dt.dp)==c("CHROM","POS")))
