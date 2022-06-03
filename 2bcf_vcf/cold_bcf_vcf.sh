@@ -9,7 +9,8 @@ in_bcf="/Users/ychen/COLD/result/bcf_piled/cold_piled.bcf"
 # filter expression removin non-SNPs and positions of dubious
 # coverage depth (adjust as needed; here, ~2200x coverage was
 # expected across all samples in the mpileup)
-flt_expr='TYPE = "snp" & INFO/DP > 1500 & INFO/DP < 7000'
+flt_expr='TYPE = "snp" & INFO/DP > 3500 & INFO/DP < 14500'
+
 # output path (bgzipped vcf is the most widely used format)
 out_vcf="/Users/ychen/COLD/result/vcf/cold_piled_flt.vcf.gz"
 
